@@ -1,11 +1,11 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from "typeorm";
-import defaultEntity from "./Entity";
+import DefaultEntity from "./Entity";
 import Post from "./Post";
 import User from "./User";
 import { Expose } from "class-transformer";
 
 @Entity("communities")
-export default class Community extends defaultEntity {
+export default class Community extends DefaultEntity {
   @Index()
   @Column({ unique: true })
   name: string;

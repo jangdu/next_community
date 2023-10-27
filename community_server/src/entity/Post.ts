@@ -1,14 +1,14 @@
 import { BeforeInsert, Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 import { Exclude, Expose } from "class-transformer";
 import Community from "./Community";
-import defaultEntity from "./Entity";
+import DefaultEntity from "./Entity";
 import User from "./User";
 import Vote from "./Vote";
 import Comment from "./Comment";
 import { makeId, slugify } from "../utils/helpers";
 
 @Entity("posts")
-export default class Post extends defaultEntity {
+export default class Post extends DefaultEntity {
   @Index()
   @Column()
   identifier: string;

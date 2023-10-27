@@ -2,10 +2,10 @@ import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import Comment from "./Comment";
 import Post from "./Post";
 import User from "./User";
-import defaultEntity from "./Entity";
+import DefaultEntity from "./Entity";
 
 @Entity("votes")
-export default class Vote extends defaultEntity {
+export default class Vote extends DefaultEntity {
   @Column()
   value: number;
 

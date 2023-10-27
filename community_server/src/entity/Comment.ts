@@ -4,10 +4,10 @@ import { makeId } from "../utils/helpers";
 import Post from "./Post";
 import Vote from "./Vote";
 import User from "./User";
-import defaultEntity from "./Entity";
+import DefaultEntity from "./Entity";
 
 @Entity("comments")
-export default class Comment extends defaultEntity {
+export default class Comment extends DefaultEntity {
   @Index()
   @Column()
   identifier: string;
