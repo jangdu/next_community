@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: "comu-client",
-      script: "npm run start:prod",
+      script: "GENERATE_SOURCEMAP=false npm run start:prod",
     },
   ],
 };
