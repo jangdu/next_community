@@ -18,7 +18,7 @@ jobs:
           password: ${{ secrets.REMOTE_PASSWORD }} # ec2 instance password
           port: ${{ secrets.REMOTE_SSH_PORT }} # 접속포트
           script: | # 실행할 스크립트
-            cd /home/ubuntu/next_community
+            cd /home/jangdu/next_community
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             nvm use v18.15.0
