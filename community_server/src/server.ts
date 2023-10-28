@@ -4,16 +4,23 @@ import morgan from "morgan";
 import { AppDataSource } from "./data-source";
 
 import dotenv from "dotenv";
+import cors from "cors";
+
+import authRoutes from "./routes/auth";
 
 const app = express();
 
 app.use(express.json());
 const origin = process.env.ORIGIN;
+app.use(cors({ origin }));
 
 // dev, short, common, combined
 app.use(morgan("dev"));
 
 app.get("/", (_, res) => res.send("running server"));
+
+// routes
+app.use("/api/auth", authRoutes);
 
 let port = 4000;
 
