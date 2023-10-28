@@ -23,7 +23,8 @@ export default function SignUp() {
       });
 
       console.log(res);
-      // router.push('login');
+      alert('회원가입이 완료되었습니다.');
+      router.push('signin');
     } catch (error: any) {
       console.log(error);
       if ('response' in error && error.response?.data) {

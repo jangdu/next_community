@@ -38,13 +38,13 @@ export default function SignIn() {
           <form onSubmit={handleSubmit}>
             <InputGroup
               placeholder="Username"
-              value="username"
+              value={username}
               setValue={setUsername}
               error={errors.username}
             />
             <InputGroup
               placeholder="Password"
-              value="password"
+              value={password}
               setValue={setPassword}
               error={errors.password}
             />

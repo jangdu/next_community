@@ -4,6 +4,7 @@ import User from '../entities/User';
 import { isEmpty, validate } from 'class-validator';
 import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
+import dotenv from 'dotenv';
 
 const mapErrors = (errors: Object[]) => {
   return errors.reduce((acc: any, error: any) => {
@@ -75,7 +76,7 @@ const signin = async (req: Request, res: Response) => {
         .json({ password: '비밀번호가 일치하지 않습니다.' });
     }
 
-    const token = jwt.sign({ username }, process.env.JWT_SECRET);
+    const token = jwt.sign({ username }, process.env.JWTSECRET);
 
     // 쿠키저장
     res.set(
