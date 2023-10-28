@@ -1,4 +1,4 @@
-import InputGroup from '@/compnents/inputGroup';
+import InputGroup from '../compnents/inputGroup';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
