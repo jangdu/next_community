@@ -24,8 +24,8 @@ const InputGroup: React.FC<InputGroupProps> = ({
         style={{ minWidth: 300 }}
         className={classNames(
           `
-            w-full transition duration-150 border-gray-300 
-            rounded-md bg-gray-50 focus:bg-white hover:bg-white`,
+            w-full transition p-2 duration-150 mb-2 border-gray-300 
+            rounded-md bg-gray-100 focus:bg-white`,
           // error가 있으면 이거 true로
           { 'border-red-500': error },
         )}
