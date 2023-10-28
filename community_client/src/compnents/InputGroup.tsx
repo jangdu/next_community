@@ -29,6 +29,9 @@ const InputGroup: React.FC<InputGroupProps> = ({
           // error가 있으면 이거 true로
           { 'border-red-500': error },
         )}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
       />
       <small className="font-medium text-red-500">{error} </small>
     </div>

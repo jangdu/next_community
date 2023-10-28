@@ -23,10 +23,14 @@ export default function SignUp() {
       });
 
       console.log(res);
-      router.push('login');
+      // router.push('login');
     } catch (error: any) {
       console.log(error);
-      setErrors(error.response.data || {});
+      if ('response' in error && error.response?.data) {
+        setErrors(error.response.data);
+      } else {
+        setErrors({});
+      }
     }
   };
 
@@ -61,7 +65,7 @@ export default function SignUp() {
           <small>
             <span>이미 가입하셨나요?</span>
             <Link href="/login">
-              <a className="ml-1 text-blue-500 uppercase">로그인</a>
+              <button className="ml-1 text-blue-500 uppercase">로그인</button>
             </Link>
           </small>
         </div>
