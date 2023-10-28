@@ -83,6 +83,7 @@ const signin = async (req: Request, res: Response) => {
       'Set-Cookie',
       cookie.serialize('token', token, {
         httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
         maxAge: 60 * 60 * 24 * 7,
         path: '/',
       }),
