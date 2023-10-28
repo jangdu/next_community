@@ -1,7 +1,3 @@
 module.exports = {
-  content: ['./src/**/*.tsx'],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+  plugins: ['tailwindcss', 'postcss-preset-env'],
 };
