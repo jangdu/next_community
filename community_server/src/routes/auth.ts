@@ -6,6 +6,9 @@ import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
 import dotenv from 'dotenv';
 
+import userMiddleware from '../middlewares/user';
+import authMiddleware from '../middlewares/auth';
+
 const mapErrors = (errors: Object[]) => {
   return errors.reduce((acc: any, error: any) => {
     acc[error.property] = Object.values(error.constraints)[0];
@@ -83,6 +86,7 @@ const signin = async (req: Request, res: Response) => {
       'Set-Cookie',
       cookie.serialize('token', token, {
         httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
         maxAge: 60 * 60 * 24 * 7,
         path: '/',
       }),
@@ -95,9 +99,31 @@ const signin = async (req: Request, res: Response) => {
   }
 };
 
+// 로그아웃
+const signout = async (_: Request, res: Response) => {
+  res.set(
+    'Set-Cookie',
+    cookie.serialize('token', '', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      expires: new Date(0),
+      path: '/',
+    }),
+  );
+  res.status(200).json({ success: true });
+};
+
+// 로그인 확인
+const me = async (_: Request, res: Response) => {
+  return res.json(res.locals.user);
+};
+
 const router = Router();
 
+router.get('/me', userMiddleware, authMiddleware, me);
 router.post('/register', register);
 router.post('/signin', signin);
+router.post('/signout', userMiddleware, authMiddleware, signout);
 
 export default router;

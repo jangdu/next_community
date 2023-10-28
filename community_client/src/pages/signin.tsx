@@ -1,12 +1,21 @@
 import InputGroup from '@/components/InputGroup';
+import { useAuthDispatch, useAuthState } from '@/context/auth';
 import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { FormEvent, useState } from 'react';
 
 export default function SignIn() {
+  let router = useRouter();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<any>({});
+
+  const dispatch = useAuthDispatch();
+  const { authenticated } = useAuthState();
+
+  if (authenticated) router.push('/');
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -20,6 +29,10 @@ export default function SignIn() {
         },
         { withCredentials: true },
       );
+
+      dispatch('LOGIN', res.data?.user);
+
+      router.push('/');
     } catch (error: any) {
       console.error(error);
       if ('response' in error && error.response?.data) {

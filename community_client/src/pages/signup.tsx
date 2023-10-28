@@ -55,6 +55,7 @@ export default function SignUp() {
             />
             <InputGroup
               placeholder="Password"
+              type="password"
               value={password}
               setValue={setPassword}
               error={errors.password}
@@ -65,7 +66,7 @@ export default function SignUp() {
           </form>
           <small className="flex justify-end">
             <span>이미 가입하셨나요?</span>
-            <Link href="/login">
+            <Link href="/signin">
               <button className="ml-1 text-blue-500 uppercase">로그인</button>
             </Link>
           </small>
