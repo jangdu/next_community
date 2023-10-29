@@ -8,6 +8,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 import authRoutes from './routes/auth';
+import communitiesRoutes from './routes/communities';
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.get('/', (_, res) => res.send('running server'));
 
 // routes
 app.use('/api/auth', authRoutes);
+app.use('/api/communities', communitiesRoutes);
 
 let port = 4000;
 
