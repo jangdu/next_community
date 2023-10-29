@@ -32,6 +32,8 @@ export default function SignIn() {
 
       dispatch('LOGIN', res.data?.user);
 
+      alert('로그인이 완료되었습니다.');
+
       router.push('/');
     } catch (error: any) {
       console.error(error);
@@ -57,6 +59,7 @@ export default function SignIn() {
             />
             <InputGroup
               placeholder="Password"
+              type="password"
               value={password}
               setValue={setPassword}
               error={errors.password}
