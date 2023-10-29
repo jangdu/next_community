@@ -13,10 +13,12 @@ export default function CommunityCreate() {
 
     try {
       const res = await axios.post(
-        '/subs',
+        '/communities',
         { name, title, description },
         { withCredentials: true },
       );
+
+      alert(`${res.data.name} 커뮤니티 생성이 완료되었습니다.`);
     } catch (error: any) {
       console.error(error);
       if ('response' in error && error.response?.data) {
