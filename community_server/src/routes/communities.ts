@@ -78,9 +78,26 @@ const communityRanking = async (_: Request, res: Response) => {
   }
 };
 
+const getCommunity = async (req: Request, res: Response) => {
+  const { name } = req.params;
+
+  try {
+    const community = await Community.findOne({ where: { name } });
+
+    if (!community) {
+      res.status(404).json({ error: '커뮤니티를 찾을 수 없습니다.' });
+    }
+
+    return res.json(community);
+  } catch (error) {
+    return res.status(500).json({ error: '문제가 발생했습니다.' });
+  }
+};
+
 const router = Router();
 
 router.post('/', userMiddleware, authMiddleware, createCommunity);
 router.get('/community/ranking', communityRanking);
+router.get('/:name', userMiddleware, getCommunity);
 
 export default router;
