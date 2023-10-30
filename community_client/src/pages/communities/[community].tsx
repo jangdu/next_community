@@ -1,11 +1,23 @@
+import { useAuthState } from '@/context/auth';
 import axios from 'axios';
 import classNames from 'classnames';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { Fragment } from 'react';
+import React, {
+  ChangeEvent,
+  Fragment,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import useSWR from 'swr';
 
 export default function CommunityPage() {
+  const [isCommunityOwner, setIsCommunityOwner] = useState(false);
+  const { authenticated, user } = useAuthState();
+
+  const router = useRouter();
+
   const fetcher = async (url: string) => {
     try {
       const res = await axios.get(url);
@@ -15,8 +27,6 @@ export default function CommunityPage() {
     }
   };
 
-  const router = useRouter();
-
   const communityName = router.query.community;
 
   const { data: community, error } = useSWR(
@@ -24,10 +34,50 @@ export default function CommunityPage() {
     fetcher,
   );
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const openFileInput = (type: string) => {
+    if (!isCommunityOwner) return;
+    const fileInput = fileInputRef.current;
+    if (fileInput) {
+      fileInput.name = type;
+      fileInput.click();
+    }
+  };
+
+  const uploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files === null) return;
+
+    const file = e.target.files[0];
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('type', fileInputRef.current!.name);
+
+    try {
+      await axios.post(`/communities/${community.name}/upload`, formData, {
+        headers: { 'Content-Type': 'mulipart/form-data' },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (!community) return;
+    setIsCommunityOwner(authenticated && user?.username === community.username);
+  }, [community]);
+
   return (
     <div>
       {community && (
         <Fragment>
+          <input
+            type="file"
+            hidden={true}
+            ref={fileInputRef}
+            onChange={uploadImage}
+          />
           <div>
             <div className={classNames('bg-gray-400')}>
               {community.bannerUrn ? (
@@ -42,7 +92,10 @@ export default function CommunityPage() {
                   onClick={() => openFileInput('banner')}
                 ></div>
               ) : (
-                <div className="h-20 bg-gray-400"></div>
+                <div
+                  className="h-20 bg-gray-400"
+                  onClick={() => openFileInput('banner')}
+                ></div>
               )}
             </div>
           </div>
