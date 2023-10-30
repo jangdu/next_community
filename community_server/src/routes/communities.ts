@@ -6,6 +6,7 @@ import User from '../entities/User';
 
 import userMiddleware from '../middlewares/user';
 import authMiddleware from '../middlewares/auth';
+import Post from '../entities/Post';
 
 const createCommunity = async (req: Request, res: Response) => {
   const { name, title, description } = req.body;
@@ -56,8 +57,30 @@ const createCommunity = async (req: Request, res: Response) => {
   }
 };
 
+// post의 갯수를 기준으로 5개의 커뮤니티 랭킹 조회
+const communityRanking = async (_: Request, res: Response) => {
+  try {
+    const imageUrlExp = `COALESCE('${process.env.APP_URL}/images/' ||s."imageUrl",'https://www.gravatar.com/avatar?d=mp&f=y')`;
+    const subs = await AppDataSource.createQueryBuilder()
+      .select(
+        `s.title, s.name, ${imageUrlExp} as "imageUrn", count(p.id) as "postCount"`,
+      )
+      .from(Community, 's')
+      .leftJoin(Post, 'p', `s.name = p."subName"`)
+      .groupBy('s.title, s.name, "imageUrn"')
+      .orderBy(`"postCount"`, 'DESC')
+      .limit(5)
+      .execute();
+    return res.json(subs);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: '문제가 발생했습니다.' });
+  }
+};
+
 const router = Router();
 
 router.post('/', userMiddleware, authMiddleware, createCommunity);
+router.get('/community/ranking', communityRanking);
 
 export default router;
