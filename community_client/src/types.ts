@@ -5,7 +5,7 @@ export interface User {
   updatedAt: string;
 }
 
-export interface Sub {
+export interface Community {
   createdAt: string;
   updatedAt: string;
   name: string;
@@ -26,11 +26,11 @@ export interface Post {
   title: string;
   slug: string;
   body: string;
-  subName: string;
+  communityName: string;
   username: string;
   createdAt: string;
   updatedAt: string;
-  sub?: Sub;
+  community?: Community;
 
   url: string;
   userVote?: number;

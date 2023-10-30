@@ -11,7 +11,7 @@ export const NavBar: React.FC = () => {
 
   const handleLogout = () => {
     axios
-      .post('/auth/logout')
+      .post('/auth/signout')
       .then(() => {
         dispatch('LOGOUT');
         window.location.reload();
@@ -54,12 +54,12 @@ export const NavBar: React.FC = () => {
             </button>
           ) : (
             <>
-              <Link href="/login">
+              <Link href="/signin">
                 <button className="w-20 px-2 pt-1 mr-2 text-sm text-center text-blue-500 border border-blue-500 rounded h-7">
                   로그인
                 </button>
               </Link>
-              <Link href="/register">
+              <Link href="/signup">
                 <button className="w-20 px-2 pt-1 text-sm text-center text-white bg-gray-400 rounded h-7">
                   회원가입
                 </button>
