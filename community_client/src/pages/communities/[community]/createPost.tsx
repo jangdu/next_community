@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { GetServerSideProps } from 'next';
 import React, { useState } from 'react';
 
 export default function CreatePost() {
@@ -48,3 +50,17 @@ export default function CreatePost() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  try {
+    const cookie = req.headers.cookie;
+    if (!cookie) throw new Error('쿠키에 로그인된 토큰이 없습니다.');
+
+    await axios.get('/auth/me', { headers: { cookie } });
+
+    return { props: {} };
+  } catch (error) {
+    res.writeHead(307, { Location: '/signin' }).end();
+    return { props: {} };
+  }
+};
