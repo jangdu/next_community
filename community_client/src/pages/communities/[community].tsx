@@ -1,3 +1,4 @@
+import SideBar from '@/components/Sidebar';
 import { useAuthState } from '@/context/auth';
 import axios from 'axios';
 import classNames from 'classnames';
@@ -121,6 +122,10 @@ export default function CommunityPage() {
               </div>
             </div>
             <div className="flex max-w-5xl px-4 pt-5 mx-auto"></div>
+          </div>
+          <div className="flex max-w-5xl px-4 pt-5 mx-auto">
+            <div className="w-full md:mr-3 md:w-8/12"> </div>
+            <SideBar community={community} />
           </div>
         </Fragment>
       )}
