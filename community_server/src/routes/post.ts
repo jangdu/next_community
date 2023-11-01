@@ -3,6 +3,7 @@ import userMiddleware from '../middlewares/user';
 import authMiddleware from '../middlewares/auth';
 import Community from '../entities/Community';
 import Post from '../entities/Post';
+import { createComment } from './comments';
 
 const getPost = async (req: Request, res: Response) => {
   const { identifier, slug } = req.params;
@@ -58,5 +59,6 @@ const router = Router();
 
 router.get('/:identifier/:slug', userMiddleware, getPost);
 router.post('/', userMiddleware, authMiddleware, createPost);
+router.post('/:identifier/:slug/comments', userMiddleware, createComment);
 
 export default router;

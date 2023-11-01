@@ -22,6 +22,8 @@ export default function CommentInput({ post }: PostProps) {
         body: newComment,
       });
 
+      alert('작성완료!!');
+
       setNewComment('');
     } catch (error) {
       console.log(error);
@@ -43,6 +45,7 @@ export default function CommentInput({ post }: PostProps) {
           <form onSubmit={submitComment}>
             <textarea
               className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-gray-600"
+              value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
             ></textarea>
             <div className="flex justify-end">
