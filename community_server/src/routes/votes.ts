@@ -61,7 +61,7 @@ const vote = async (req: Request, res: Response) => {
         identifier,
         slug,
       },
-      relations: ['comments', 'comments.votes', 'sub', 'votes'],
+      relations: ['comments', 'comments.votes', 'community', 'votes'],
     });
 
     post.setUserVote(user);
