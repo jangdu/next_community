@@ -23,8 +23,6 @@ export default function CommentInput({ post, commentMutate }: PostProps) {
         body: newComment,
       });
 
-      alert('작성완료!!');
-
       setNewComment('');
       commentMutate();
     } catch (error) {
