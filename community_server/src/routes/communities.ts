@@ -91,6 +91,17 @@ const getCommunity = async (req: Request, res: Response) => {
       res.status(404).json({ error: '커뮤니티를 찾을 수 없습니다.' });
     }
 
+    const posts = await Post.find({
+      where: { communityName: community.name },
+      order: { createdAt: 'DESC' },
+      relations: ['comments', 'votes'],
+    });
+
+    community.posts = posts;
+    if (res.locals.user) {
+      community.posts.forEach((p) => p.setUserVote(res.locals.user));
+    }
+
     return res.json(community);
   } catch (error) {
     console.log(error);

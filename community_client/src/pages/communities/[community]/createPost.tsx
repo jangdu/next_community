@@ -1,12 +1,34 @@
+import { Post } from '@/types';
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { FormEvent, useState } from 'react';
 
 export default function CreatePost() {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
-  const submitPost = () => {};
+  const router = useRouter();
+  const { community: communityName } = router.query;
+
+  const submitPost = async (e: FormEvent) => {
+    e.preventDefault();
+
+    if (title.trim() === '' || !communityName)
+      return alert('타이틀을 입력해주세요');
+
+    try {
+      const { data: post } = await axios.post<Post>('/posts', {
+        title: title.trim(),
+        body,
+        community: communityName,
+      });
+
+      router.push(`/r/${communityName}/${post.identifier}/${post.slug}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex flex-col justify-center pt16">

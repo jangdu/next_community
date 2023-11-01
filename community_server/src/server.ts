@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser';
 
 import authRoutes from './routes/auth';
 import communitiesRoutes from './routes/communities';
+import postRoutes from './routes/post';
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.get('/', (_, res) => res.send('running server'));
 // routes
 app.use('/api/auth', authRoutes);
 app.use('/api/communities', communitiesRoutes);
+app.use('/api/posts', postRoutes);
 
 app.use(express.static('public'));
 let port = 4000;

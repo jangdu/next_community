@@ -1,13 +1,21 @@
-import { BeforeInsert, Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from "typeorm";
-import { Exclude, Expose } from "class-transformer";
-import Community from "./Community";
-import DefaultEntity from "./Entity";
-import User from "./User";
-import Vote from "./Vote";
-import Comment from "./Comment";
-import { makeId, slugify } from "../utils/helpers";
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
+import { Exclude, Expose } from 'class-transformer';
+import Community from './Community';
+import DefaultEntity from './Entity';
+import User from './User';
+import Vote from './Vote';
+import Comment from './Comment';
+import { makeId, slugify } from '../utils/helpers';
 
-@Entity("posts")
+@Entity('posts')
 export default class Post extends DefaultEntity {
   @Index()
   @Column()
@@ -20,21 +28,21 @@ export default class Post extends DefaultEntity {
   @Column()
   slug: string;
 
-  @Column({ nullable: true, type: "text" })
+  @Column({ nullable: true, type: 'text' })
   body: string;
 
   @Column()
-  subName: string;
+  communityName: string;
 
   @Column()
   username: string;
 
   @ManyToOne(() => User, (user) => user.posts)
-  @JoinColumn({ name: "username", referencedColumnName: "username" })
+  @JoinColumn({ name: 'username', referencedColumnName: 'username' })
   user: User;
 
-  @ManyToOne(() => Community, (sub) => sub.posts)
-  @JoinColumn({ name: "communityName", referencedColumnName: "name" })
+  @ManyToOne(() => Community, (community) => community.posts)
+  @JoinColumn({ name: 'communityName', referencedColumnName: 'name' })
   community: Community;
 
   @Exclude()
@@ -46,7 +54,7 @@ export default class Post extends DefaultEntity {
   votes: Vote[];
 
   @Expose() get url(): string {
-    return `/r/${this.subName}/${this.identifier}/${this.slug}`;
+    return `/r/${this.communityName}/${this.identifier}/${this.slug}`;
   }
 
   @Expose() get commentCount(): number {
