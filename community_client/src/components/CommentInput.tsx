@@ -6,9 +6,10 @@ import { Post } from '@/types';
 
 interface PostProps {
   post: Post;
+  commentMutate: any;
 }
 
-export default function CommentInput({ post }: PostProps) {
+export default function CommentInput({ post, commentMutate }: PostProps) {
   const { authenticated, user } = useAuthState();
   const [newComment, setNewComment] = useState('');
 
@@ -25,6 +26,7 @@ export default function CommentInput({ post }: PostProps) {
       alert('작성완료!!');
 
       setNewComment('');
+      commentMutate();
     } catch (error) {
       console.log(error);
     }

@@ -1,4 +1,4 @@
-import { Post } from '@/types';
+import { Comment, Post } from '@/types';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -6,13 +6,22 @@ import React from 'react';
 import useSWR from 'swr';
 import dayjs from 'dayjs';
 import CommentInput from '@/components/CommentInput';
+import CommentList from '@/components/CommentList';
 
 export default function PostPage() {
   const router = useRouter();
   const { identifier, community, slug } = router.query;
 
-  const { data: post, error } = useSWR<Post>(
+  const {
+    data: post,
+    error,
+    mutate: postMutate,
+  } = useSWR<Post>(
     identifier && community ? `/posts/${identifier}/${slug}` : null,
+  );
+
+  const { data: comments, mutate: commentMutate } = useSWR<Comment[]>(
+    identifier && slug ? `/posts/${identifier}/${slug}/comments` : null,
   );
 
   return (
@@ -45,9 +54,18 @@ export default function PostPage() {
                     {post.commentCount} Comments
                   </span>
                 </div>
-                <div className="w-full">
-                  <CommentInput post={post} />
-                </div>
+                {identifier && slug && (
+                  <div className="flex flex-col w-full">
+                    <CommentInput post={post} commentMutate={commentMutate} />
+                    {comments && (
+                      <CommentList
+                        comments={comments}
+                        identifier={identifier}
+                        slug={slug}
+                      />
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           )}
