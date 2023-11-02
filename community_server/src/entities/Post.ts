@@ -54,7 +54,7 @@ export default class Post extends DefaultEntity {
   votes: Vote[];
 
   @Expose() get url(): string {
-    return `/r/${this.communityName}/${this.identifier}/${this.slug}`;
+    return `/communities/${this.communityName}/${this.identifier}/${this.slug}`;
   }
 
   @Expose() get commentCount(): number {
