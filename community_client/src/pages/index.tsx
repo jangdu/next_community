@@ -1,4 +1,5 @@
 import CommunityList from '@/components/CommunityList';
+import LoadingUi from '@/components/LoadingUi';
 import PostCard from '@/components/PostCard';
 import { Post } from '@/types';
 import { Inter } from 'next/font/google';
@@ -58,10 +59,10 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-row">
+    <div className="flex p-5 gap-2">
       {/* allPostList */}
-      <div className="w-9/12">
-        {isInitialLoading && <p>Loading...</p>}
+      <div className="w-9/12 md:w-8/12 mx-auto">
+        {isInitialLoading && <LoadingUi />}
         {posts?.map((post) => (
           <div key={post.identifier} id={post.identifier}>
             <PostCard
@@ -71,9 +72,7 @@ export default function Home() {
             />
           </div>
         ))}
-        {isValidating && posts.length > 0 && (
-          <p className="text-lg">is loading more</p>
-        )}
+        {isValidating && posts.length > 0 && <LoadingUi />}
       </div>
       <CommunityList />
     </div>
