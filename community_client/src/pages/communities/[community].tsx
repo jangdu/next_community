@@ -19,20 +19,10 @@ export default function CommunityPage() {
 
   const router = useRouter();
 
-  const fetcher = async (url: string) => {
-    try {
-      const res = await axios.get(url);
-      return res.data;
-    } catch (error: any) {
-      throw error.response.data;
-    }
-  };
-
   const communityName = router.query.community;
 
   const { data: community, error } = useSWR(
     communityName ? `communities/${communityName}` : null,
-    fetcher,
   );
 
   const fileInputRef = useRef<HTMLInputElement>(null);

@@ -15,7 +15,7 @@ NextJS와 Express, TypeORM을 활용한 커뮤니티 프로젝트
 
 ### **아키텍쳐 패턴**
 
-![아키텍쳐 패턴](https://res.cloudinary.com/dyhnnmhcf/image/upload/v1698827543/drawSQL-community-export-2023-10-27_foxt61.png)
+![아키텍쳐 패턴](https://res.cloudinary.com/dyhnnmhcf/image/upload/v1698827450/community_wy0x2m.png)
 
 ### **ERD**
 
