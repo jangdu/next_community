@@ -10,14 +10,14 @@ import dayjs from 'dayjs';
 
 interface PostCardProps {
   post: Post;
-  community: Community;
-  communityMutate: any;
+  community?: Community;
+  mutate: any;
   isInCommunityPage: boolean;
 }
 
 export default function PostCard({
   post,
-  communityMutate,
+  mutate,
   isInCommunityPage,
   community,
 }: PostCardProps) {
@@ -43,7 +43,7 @@ export default function PostCard({
         commentIdentifier: comment?.identifier,
         value,
       });
-      communityMutate();
+      mutate();
     } catch (error) {
       console.log(error);
     }
@@ -79,11 +79,15 @@ export default function PostCard({
       {/* { 포스트 } */}
       <div className="w-full p-3 flex flex-col">
         <div className="flex flex-row items-center">
-          {!isInCommunityPage && (
+          {!isInCommunityPage && post.community && (
             <div className="flex flex-row items-center">
               <Link href={`/communities/${post.communityName}`} passHref>
                 <Image
-                  src={community.imageUrn}
+                  src={
+                    post.community.imageUrn
+                      ? post.community.imageUrn
+                      : community!.imageUrn
+                  }
                   width={18}
                   height={18}
                   alt="community"

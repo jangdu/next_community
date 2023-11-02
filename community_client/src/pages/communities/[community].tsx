@@ -78,7 +78,7 @@ export default function CommunityPage() {
       <PostCard
         key={post.identifier}
         post={post}
-        communityMutate={communityMutate}
+        mutate={communityMutate}
         isInCommunityPage={isInCommunityPage}
         community={community}
       />
