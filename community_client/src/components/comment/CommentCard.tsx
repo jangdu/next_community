@@ -1,5 +1,5 @@
 import React from 'react';
-import Vote from './Vote';
+import Vote from '../Vote';
 import { Comment, Post } from '@/types';
 import Link from 'next/link';
 import dayjs from 'dayjs';

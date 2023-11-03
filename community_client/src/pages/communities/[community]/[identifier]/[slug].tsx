@@ -1,15 +1,15 @@
 import { Comment, Post } from '@/types';
-import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import useSWR from 'swr';
 import dayjs from 'dayjs';
-import CommentInput from '@/components/CommentInput';
-import CommentList from '@/components/CommentList';
+import CommentInput from '@/components/comment/CommentInput';
+import CommentList from '@/components/comment/CommentList';
 import { useAuthState } from '@/context/auth';
-import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 import Vote from '@/components/Vote';
+import CommunityProfile from '@/components/community/CommunityProfile';
+import { FaRegCommentAlt } from 'react-icons/fa';
 
 export default function PostPage() {
   const router = useRouter();
@@ -30,36 +30,39 @@ export default function PostPage() {
 
   return (
     <div className="flex max-w-5xl px-4 pt-5 mx-auto">
-      <div className="w-full md:mr-4 md:w-[70%]">
-        <div className="bg-white rounded">
+      <div className="w-full md:w-9/12 mx-auto">
+        <div className="bg-white rounded-md p-3">
           {post && (
             <div className="flex">
-              <div className="w-10 py-5 text-center text-xl">
-                <Vote post={post} mutate={postMutate} />
-              </div>
               <div className="py-2 px-2 w-full">
-                <div className="flex items-center">
-                  <p className="flex flex-row gap-2 text-sm text-gray-400">
-                    <Link href={`/users/${post.username}`}>
-                      <button className="hover:text-black">
-                        {post.username}
-                      </button>
-                    </Link>
-
-                    <Link href={`${post.url}`}>
-                      <button className="hover:text-black">
+                <div className="flex justify-between w-full">
+                  <div className="flex flex-col">
+                    <div className="flex flex-row items-center text-sm">
+                      {post.community && (
+                        <CommunityProfile community={post.community} />
+                      )}
+                      <p>post by</p>
+                      <Link href={`users/${post.username}`} passHref>
+                        <button className="text-violet-400 ms-1 font-semibold hover:underline">
+                          {post.username}
+                        </button>
+                      </Link>
+                      <p className="ms-1">
                         {dayjs(post.createdAt).format('YYYY-MM-DD HH:mm')}
-                      </button>
-                    </Link>
-                  </p>
+                      </p>
+                    </div>
+                    <h1 className="text-3xl mt-2">{post.title}</h1>
+                  </div>
+                  <div className="right-0 text-center text-xl">
+                    <Vote post={post} mutate={postMutate} />
+                  </div>
                 </div>
-                <h1 className="my-1 text-xl font-medium">{post.title}</h1>
-                <p className="my-3 text-base">{post.body}</p>
-                <div className="flex items-center">
-                  <i className="mr-1 fas fa-comment-alt fa-xs"></i>
-                  <span className="font-medium">
-                    {post.commentCount} Comments
-                  </span>
+                <p className="my-3 text-base border-b px-3 pb-4">{post.body}</p>
+                <div className="ms-2 mb-2 mt-4 w-fit flex flex-row items-center gap-1">
+                  <div className="mt-1 mr-1">
+                    <FaRegCommentAlt />
+                  </div>
+                  <span>댓글 {comments?.length || 0}개</span>
                 </div>
                 {identifier && slug && (
                   <div className="flex flex-col w-full">

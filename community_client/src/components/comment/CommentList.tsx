@@ -1,7 +1,5 @@
 import React from 'react';
 import { Comment, Post } from '@/types';
-import Link from 'next/link';
-import Vote from './Vote';
 import CommentCard from './CommentCard';
 
 interface CommentListProps {

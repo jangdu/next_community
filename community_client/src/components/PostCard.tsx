@@ -5,6 +5,7 @@ import React from 'react';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import dayjs from 'dayjs';
 import Vote from './Vote';
+import CommunityProfile from './community/CommunityProfile';
 
 interface PostCardProps {
   post: Post;
@@ -32,30 +33,7 @@ export default function PostCard({
       <div className="w-full p-3 flex flex-col">
         <div className="flex flex-row justify-between items-center">
           {!isInCommunityPage && post.community && (
-            <div className="flex flex-row items-center">
-              <Link href={`/communities/${post.communityName}`} passHref>
-                <Image
-                  src={
-                    post.community.imageUrn
-                      ? post.community.imageUrn
-                      : community!.imageUrn
-                  }
-                  width={18}
-                  height={18}
-                  alt="community"
-                  className="rounded-full cursor-pointer"
-                />
-              </Link>
-              <Link
-                className="flex items-center"
-                href={`/communities/${post.communityName}`}
-              >
-                <button className="mx-2 text-sm font-bold cursor-pointer hover:underline">
-                  {post.communityName}
-                </button>
-                {/* <span className="mx-1 text-sm text-gray-500">▪</span> */}
-              </Link>
-            </div>
+            <CommunityProfile community={post.community} />
           )}
           <div className="flex flex-row items-center text-sm text-gray-500">
             <p>post by</p>
