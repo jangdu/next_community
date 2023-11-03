@@ -16,22 +16,22 @@ export default function CommentCard({
   commentMutate,
 }: CommentCardProps) {
   return (
-    <div className="flex items-center border-b py-2" key={comment.identifier}>
+    <div className="flex border-b py-3" key={comment.identifier}>
       <Vote post={post} comment={comment} mutate={commentMutate} />
-      <div className="p-2">
-        <div className="mb-2 text-xs leading-none">
-          <Link href={`users/${comment.username}`}>
-            <button className="mx-1 font-bold hover:underline">
-              {comment.username}
-            </button>
-          </Link>
-          <span className="text-gray-500">
-            {`${comment.voteScore}points | ${dayjs(comment.createdAt).format(
-              'YYYY-MM-DD HH:mm',
-            )}`}
-          </span>
+      <div className="flex p-2 h-full">
+        <div className=" flex flex-col ">
+          <div className="mb-2 text-xs leading-none flex flex-row">
+            <Link href={`users/${comment.username}`}>
+              <button className="mx-1 font-bold hover:underline">
+                {comment.username}
+              </button>
+            </Link>
+            <span className="text-gray-500">
+              {`${dayjs(comment.createdAt).format('YYYY-MM-DD HH:mm')}`}
+            </span>
+          </div>
+          <p>{comment.body}</p>
         </div>
-        <p>{comment.body}</p>
       </div>
     </div>
   );

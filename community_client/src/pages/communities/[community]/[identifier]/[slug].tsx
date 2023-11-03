@@ -29,9 +29,9 @@ export default function PostPage() {
   );
 
   return (
-    <div className="flex max-w-5xl px-4 pt-5 mx-auto">
+    <div className="flex max-w-5xl px-4 py-5 mx-auto">
       <div className="w-full md:w-9/12 mx-auto">
-        <div className="bg-white rounded-md p-3">
+        <div className="bg-white rounded-md p-3 shadow-md">
           {post && (
             <div className="flex">
               <div className="py-2 px-2 w-full">
@@ -59,7 +59,7 @@ export default function PostPage() {
                 </div>
                 <p className="my-3 text-base border-b px-3 pb-4">{post.body}</p>
                 <div className="ms-2 mb-2 mt-4 w-fit flex flex-row items-center gap-1">
-                  <div className="mt-1 mr-1">
+                  <div className="mt-1 ms-6">
                     <FaRegCommentAlt />
                   </div>
                   <span>댓글 {comments?.length || 0}개</span>

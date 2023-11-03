@@ -31,25 +31,25 @@ export default function CommentInput({ post, commentMutate }: PostProps) {
   };
 
   return (
-    <div className="px-10 mb-4 w-full">
+    <div className="px-6 mb-4 w-full">
       {authenticated && user ? (
         <div className="w-full">
           <div className="my-2 text-sm flex flex-row">
             <Link href={`/users/${user.username}`}>
-              <button className="font-semibold text-blue-500">
+              <button className="font-semibold text-violet-400 hover:underline">
                 {user.username}
               </button>
             </Link>
-            <p> {' 님'} 이름으로 댓글 작성</p>
+            <p className="ms-1"> 님 이름으로 댓글 작성</p>
           </div>
           <form onSubmit={submitComment}>
             <textarea
-              className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-gray-600"
+              className="w-full p-3 border border-gray-300 rounded transition hover:border-violet-300 focus:outline-none focus:border-violet-600"
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
             ></textarea>
             <div className="flex justify-end">
-              <button className="px-3 py-1 text-white bg-gray-500 rounded">
+              <button className="px-3 py-1 text-white bg-violet-300 transition hover:bg-violet-500 rounded">
                 댓글 작성
               </button>
             </div>
