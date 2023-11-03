@@ -1,6 +1,5 @@
 import { useAuthDispatch, useAuthState } from '@/context/auth';
 import axios from 'axios';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { FaSearch } from 'react-icons/fa';
@@ -22,32 +21,24 @@ export const NavBar: React.FC = () => {
   };
 
   return (
-    <div className="fixed p-2 inset-x-0 top-0 z-10 flex items-center justify-between px-5 bg-white h-13">
-      <span className="text-2xl font-semibold text-gray-400">
-        <Link href="/">
-          HOME
-          {/* <Image
-            src="/reddit-name-logo.png"
-            alt="logo"
-            width={80}
-            height={45}
-          ></Image> */}
-        </Link>
+    <div className="fixed py-3 inset-x-0 top-0 z-10 flex items-center s: justify-between px-5 bg-white border-b-[1px] border-b-violet-300 h-13">
+      <span className="text-2xl font-bold text-violet-500">
+        <Link href="/">Community</Link>
       </span>
 
       <div className="flex items-center gap-3">
-        <div className="relative flex items-center bg-gray-100 border rounded hover:border-gray-700 hover:bg-white">
-          <FaSearch className="ml-2 text-gray-400" />
+        <div className="relative flex items-center bg-gray-100 border rounded hover:border-violet-700 hover:bg-white">
+          <FaSearch className="ml-2 text-white-400" />
           <input
             type="text"
             placeholder="Search"
-            className="px-3 py-1 bg-transparent rounded h-7 focus:outline-none"
+            className="px-3 py-4 bg-transparent rounded h-7 focus:outline-none"
           />
         </div>
         {!loading &&
           (authenticated ? (
             <button
-              className="w-20 px-2 mr-2 text-sm text-center text-white bg-gray-400 rounded h-7"
+              className="w-20 px-2 mr-2 text-sm text-center text-white bg-violet-400 rounded h-7 transition hover:bg-violet-600"
               onClick={handleLogout}
             >
               로그아웃
@@ -55,12 +46,12 @@ export const NavBar: React.FC = () => {
           ) : (
             <>
               <Link href="/signin">
-                <button className="w-20 px-2 pt-1 mr-2 text-sm text-center text-blue-500 border border-blue-500 rounded h-7">
+                <button className="w-20 px-2 text-sm text-center text-white bg-violet-400 rounded h-7 transition hover:bg-violet-600">
                   로그인
                 </button>
               </Link>
               <Link href="/signup">
-                <button className="w-20 px-2 pt-1 text-sm text-center text-white bg-gray-400 rounded h-7">
+                <button className="w-20 px-2 text-sm text-center text-white bg-violet-400 rounded h-7 transition hover:bg-violet-600">
                   회원가입
                 </button>
               </Link>

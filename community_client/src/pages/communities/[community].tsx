@@ -1,5 +1,7 @@
+import PostCard from '@/components/PostCard';
 import SideBar from '@/components/Sidebar';
 import { useAuthState } from '@/context/auth';
+import { Post } from '@/types';
 import axios from 'axios';
 import classNames from 'classnames';
 import Image from 'next/image';
@@ -21,9 +23,13 @@ export default function CommunityPage() {
 
   const communityName = router.query.community;
 
-  const { data: community, error } = useSWR(
-    communityName ? `communities/${communityName}` : null,
-  );
+  const {
+    data: community,
+    error,
+    mutate: communityMutate,
+  } = useSWR(communityName ? `communities/${communityName}` : null);
+
+  const isInCommunityPage = router.pathname === `'communities/[community]`;
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -58,6 +64,26 @@ export default function CommunityPage() {
     if (!community) return;
     setIsCommunityOwner(authenticated && user?.username === community.username);
   }, [community]);
+
+  let renderPosts;
+
+  if (!community) {
+    renderPosts = <p className="text-lg text-center">로딩중...</p>;
+  } else if (community.posts.length === 0) {
+    renderPosts = (
+      <p className="text-lg text-center">아직 작성된 포스트가 없습니다.</p>
+    );
+  } else {
+    renderPosts = community.posts.map((post: Post) => (
+      <PostCard
+        key={post.identifier}
+        post={post}
+        mutate={communityMutate}
+        isInCommunityPage={isInCommunityPage}
+        community={community}
+      />
+    ));
+  }
 
   return (
     <div>
@@ -114,7 +140,7 @@ export default function CommunityPage() {
             <div className="flex max-w-5xl px-4 pt-5 mx-auto"></div>
           </div>
           <div className="flex max-w-5xl px-4 pt-5 mx-auto">
-            <div className="w-full md:mr-3 md:w-8/12"> </div>
+            <div className="w-full md:mr-3 md:w-8/12">{renderPosts}</div>
             <SideBar community={community} />
           </div>
         </Fragment>
