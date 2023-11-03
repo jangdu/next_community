@@ -49,8 +49,7 @@ const getPost = async (req: Request, res: Response) => {
 };
 
 const createPost = async (req: Request, res: Response) => {
-  const { title, body, community } = req.body;
-  console.log(title);
+  const { title, description, body, community } = req.body;
 
   if (title.trim() === '') {
     return res.status(400).json({ title: '제목을 비워 둘 수 없습니다.' });
@@ -65,6 +64,7 @@ const createPost = async (req: Request, res: Response) => {
 
     const post = new Post();
     post.title = title;
+    post.description = description;
     post.body = body;
     post.user = user;
     post.community = communityRecord;
