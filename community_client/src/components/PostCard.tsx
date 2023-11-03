@@ -21,11 +21,13 @@ export default function PostCard({
 }: PostCardProps) {
   return (
     <div
-      className="flex mb-4 bg-white rounded-lg shadow-md"
+      className="flex mb-4 bg-white rounded-lg shadow-md overflow-hidden"
       id={post.identifier}
     >
       {/* 투표 기능 */}
-      <Vote post={post} mutate={mutate} />
+      <div className="flex bg-violet-200">
+        <Vote post={post} mutate={mutate} />
+      </div>
       {/* { 포스트 } */}
       <div className="w-full p-3 flex flex-col">
         <div className="flex flex-row justify-between items-center">

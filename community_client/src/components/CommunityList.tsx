@@ -17,9 +17,11 @@ export default function CommunityList() {
   const { data: communityRanking } = useSWR<Community[]>(address, fetcher);
 
   return (
-    <div className="hidden w-4/12 bg-white h-fit ml-3 rounded-md border border-violet-300 md:block">
-      <div className="bg-violet-400 rounded-t-md py-4 ">
-        <p className="text-lg text-white font-bold text-center">커뮤니티</p>
+    <div>
+      <div className="bg-violet-400">
+        <p className="text-lg text-white py-4 font-bold text-center">
+          커뮤니티
+        </p>
       </div>
 
       <div className="flex flex-col">
