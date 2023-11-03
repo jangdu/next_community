@@ -42,7 +42,7 @@ export default function PostPage() {
                         <CommunityProfile community={post.community} />
                       )}
                       <p>post by</p>
-                      <Link href={`users/${post.username}`} passHref>
+                      <Link href={`/users/${post.username}`} passHref>
                         <button className="text-violet-400 ms-1 font-semibold hover:underline">
                           {post.username}
                         </button>

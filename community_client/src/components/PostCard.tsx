@@ -47,8 +47,8 @@ export default function PostCard({
             </p>
           </div>
         </div>
-        <Link className="mt-4 w-fit" href={post.url}>
-          <h1 className=" hover:underline text-lg w-fit font-medium">
+        <Link className="mt-4 mb-2 w-fit" href={post.url}>
+          <h1 className=" hover:underline text-xl w-fit font-medium">
             {post.title}
           </h1>
         </Link>

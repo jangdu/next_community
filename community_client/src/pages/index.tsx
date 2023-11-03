@@ -59,9 +59,12 @@ export default function Home() {
   };
 
   return (
-    <div className="flex p-5 gap-2">
+    <div className="flex max-w-6xl mx-auto justify-around p-5 gap-2">
       {/* allPostList */}
-      <div className="w-9/12 md:w-8/12 mx-auto">
+      <div className="w-full md:w-8/12 mx-auto">
+        <h1 className="text-xl text-center p-2 my-2 font-semibold text-violet-500">
+          All Posts
+        </h1>
         {isInitialLoading && <LoadingUi />}
         {posts?.map((post) => (
           <div key={post.identifier} id={post.identifier}>
@@ -74,7 +77,7 @@ export default function Home() {
         ))}
         {isValidating && posts.length > 0 && <LoadingUi />}
       </div>
-      <div className="hidden w-4/12 shadow-md bg-white overflow-hidden h-fit ml-3 box-content rounded-lg border md:block">
+      <div className="hidden w-4/12 max-w-xs shadow-md bg-white overflow-hidden h-fit ml-3 my-3 box-content rounded-lg border md:block">
         <CommunityList />
       </div>
     </div>

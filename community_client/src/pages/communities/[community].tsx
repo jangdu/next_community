@@ -1,3 +1,4 @@
+import LoadingUi from '@/components/LoadingUi';
 import PostCard from '@/components/PostCard';
 import SideBar from '@/components/Sidebar';
 import { useAuthState } from '@/context/auth';
@@ -68,7 +69,7 @@ export default function CommunityPage() {
   let renderPosts;
 
   if (!community) {
-    renderPosts = <p className="text-lg text-center">로딩중...</p>;
+    renderPosts = <LoadingUi />;
   } else if (community.posts.length === 0) {
     renderPosts = (
       <p className="text-lg text-center">아직 작성된 포스트가 없습니다.</p>
@@ -110,13 +111,13 @@ export default function CommunityPage() {
                 ></div>
               ) : (
                 <div
-                  className="h-20 bg-gray-400"
+                  className="h-32 bg-violet-300"
                   onClick={() => openFileInput('banner')}
                 ></div>
               )}
             </div>
           </div>
-          <div className="h-20 bg-white">
+          <div className="h-28 bg-white">
             <div className="relative flex max-w-5xl px-5 mx-auto">
               <div className="absolute" style={{ top: -15 }}>
                 {community.imageUrn && (
@@ -126,15 +127,15 @@ export default function CommunityPage() {
                     width={70}
                     height={70}
                     onClick={() => openFileInput('image')}
-                    className={classNames('rounded-full')}
+                    className={classNames('rounded-full shadow')}
                   />
                 )}
               </div>
-              <div className="pt-1 pl-24">
+              <div className="px-1 mt-2 pl-24">
                 <div className="flex items-center">
-                  <h1 className="mb-1 text-3xl font-bold">{community.title}</h1>
+                  <h1 className="my-1 text-3xl font-bold">{community.name}</h1>
                 </div>
-                <p>communities/{community.name}</p>
+                <p>{community.title}</p>
               </div>
             </div>
             <div className="flex max-w-5xl px-4 pt-5 mx-auto"></div>
