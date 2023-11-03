@@ -17,17 +17,17 @@ export default function CommunityList() {
   const { data: communityRanking } = useSWR<Community[]>(address, fetcher);
 
   return (
-    <div className="hidden w-4/12 bg-white h-fit p-2 ml-3 rounded-md md:block">
-      <div className="p-4 border-b mb-4">
-        <p className="text-lg font-semibold text-center">커뮤니티</p>
+    <div className="hidden w-4/12 bg-white h-fit ml-3 rounded-md border border-violet-300 md:block">
+      <div className="bg-violet-400 rounded-t-md py-4 ">
+        <p className="text-lg text-white font-bold text-center">커뮤니티</p>
       </div>
 
-      <div className="flex flex-row">
+      <div className="flex flex-col">
         {communityRanking?.map((community) => {
           return (
             <div
               key={community.name}
-              className="flex flex-row ms-2 gap-2 p-4 border-b mb-4 w-full"
+              className="flex flex-row gap-2 p-4 w-full"
             >
               <Link href={`/communities/${community.name}`}>
                 <Image
@@ -52,7 +52,7 @@ export default function CommunityList() {
       {authenticated && (
         <div className="w-full py-6 text-center">
           <Link href={'/communities/create'}>
-            <button className=" p-2 text-center w-fit text-white bg-gray-400 rounded hover:bg-black">
+            <button className="transition p-2 text-center w-fit text-white bg-violet-400 rounded hover:bg-violet-500">
               커뮤니티 만들기
             </button>
           </Link>
