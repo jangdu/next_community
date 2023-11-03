@@ -28,6 +28,9 @@ export default class Post extends DefaultEntity {
   @Column()
   slug: string;
 
+  @Column({ nullable: true })
+  description: string;
+
   @Column({ nullable: true, type: 'text' })
   body: string;
 

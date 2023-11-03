@@ -23,10 +23,9 @@ export default function CommunityProfile({ community }: CommunityProfileProps) {
         className="flex items-center"
         href={`/communities/${community.name}`}
       >
-        <button className="mx-2 text-sm font-bold cursor-pointer hover:underline">
+        <button className="mx-2 text-sm font-semibold cursor-pointer hover:underline">
           {community.name}
         </button>
-        {/* <span className="mx-1 text-sm text-gray-500">▪</span> */}
       </Link>
     </div>
   );
