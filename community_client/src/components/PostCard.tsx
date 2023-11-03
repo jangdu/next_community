@@ -21,14 +21,14 @@ export default function PostCard({
 }: PostCardProps) {
   return (
     <div
-      className="flex mb-4 bg-white border-b border-gray-300"
+      className="flex mb-4 bg-white rounded-lg shadow-md"
       id={post.identifier}
     >
       {/* 투표 기능 */}
       <Vote post={post} mutate={mutate} />
       {/* { 포스트 } */}
       <div className="w-full p-3 flex flex-col">
-        <div className="flex flex-row items-center">
+        <div className="flex flex-row justify-between items-center">
           {!isInCommunityPage && post.community && (
             <div className="flex flex-row items-center">
               <Link href={`/communities/${post.communityName}`} passHref>
@@ -48,21 +48,21 @@ export default function PostCard({
                 className="flex items-center"
                 href={`/communities/${post.communityName}`}
               >
-                <button className="ms-2 text-sm font-bold cursor-pointer hover:underline">
+                <button className="mx-2 text-sm font-bold cursor-pointer hover:underline">
                   {post.communityName}
                 </button>
-                <span className="mx-1 text-sm text-gray-400">|</span>
+                {/* <span className="mx-1 text-sm text-gray-500">▪</span> */}
               </Link>
             </div>
           )}
-          <div className="flex flex-row justify-between items-center text-sm text-gray-500">
+          <div className="flex flex-row items-center text-sm text-gray-500">
             <p>post by</p>
             <Link href={`users/${post.username}`} passHref>
-              <button className="text-blue-400 mx-1 hover:underline">
+              <button className="text-violet-400 mx-1 hover:underline">
                 {post.username}
               </button>
             </Link>
-            <p className="mx-1">
+            <p className="ms-1">
               {dayjs(post.createdAt).format('YYYY-MM-DD HH:mm')}
             </p>
           </div>
@@ -74,10 +74,10 @@ export default function PostCard({
         </Link>
         {post.body && <p className="my-1 text-sm">{post.body}</p>}
         <Link
-          className="ms-2 my-2 w-fit flex flex-row items-center gap-1 hover:text-gray-500"
+          className="ms-2 mb-2 mt-4 w-fit flex flex-row items-center gap-1 hover:text-gray-500"
           href={post.url}
         >
-          <div className="text-lg mt-[3.2px] mr-1">
+          <div className="mt-[3.2px] mr-1">
             <FaRegCommentAlt />
           </div>
           <span>댓글 {post.commentCount || 0}</span>
