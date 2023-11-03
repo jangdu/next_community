@@ -5,6 +5,7 @@ import React from 'react';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import dayjs from 'dayjs';
 import Vote from './Vote';
+import CommunityProfile from './community/CommunityProfile';
 
 interface PostCardProps {
   post: Post;
@@ -21,39 +22,18 @@ export default function PostCard({
 }: PostCardProps) {
   return (
     <div
-      className="flex mb-4 bg-white rounded-lg shadow-md"
+      className="flex mb-4 bg-white rounded-lg shadow-md overflow-hidden"
       id={post.identifier}
     >
       {/* 투표 기능 */}
-      <Vote post={post} mutate={mutate} />
+      <div className="flex bg-violet-200">
+        <Vote post={post} mutate={mutate} />
+      </div>
       {/* { 포스트 } */}
       <div className="w-full p-3 flex flex-col">
         <div className="flex flex-row justify-between items-center">
           {!isInCommunityPage && post.community && (
-            <div className="flex flex-row items-center">
-              <Link href={`/communities/${post.communityName}`} passHref>
-                <Image
-                  src={
-                    post.community.imageUrn
-                      ? post.community.imageUrn
-                      : community!.imageUrn
-                  }
-                  width={18}
-                  height={18}
-                  alt="community"
-                  className="rounded-full cursor-pointer"
-                />
-              </Link>
-              <Link
-                className="flex items-center"
-                href={`/communities/${post.communityName}`}
-              >
-                <button className="mx-2 text-sm font-bold cursor-pointer hover:underline">
-                  {post.communityName}
-                </button>
-                {/* <span className="mx-1 text-sm text-gray-500">▪</span> */}
-              </Link>
-            </div>
+            <CommunityProfile community={post.community} />
           )}
           <div className="flex flex-row items-center text-sm text-gray-500">
             <p>post by</p>

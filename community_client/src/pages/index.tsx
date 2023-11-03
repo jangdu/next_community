@@ -1,4 +1,4 @@
-import CommunityList from '@/components/CommunityList';
+import CommunityList from '@/components/community/CommunityList';
 import LoadingUi from '@/components/LoadingUi';
 import PostCard from '@/components/PostCard';
 import { Post } from '@/types';
@@ -74,7 +74,9 @@ export default function Home() {
         ))}
         {isValidating && posts.length > 0 && <LoadingUi />}
       </div>
-      <CommunityList />
+      <div className="hidden w-4/12 shadow-md bg-white overflow-hidden h-fit ml-3 box-content rounded-lg border md:block">
+        <CommunityList />
+      </div>
     </div>
   );
 }
