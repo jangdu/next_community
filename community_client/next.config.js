@@ -12,4 +12,10 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+// next-remove-imports configuration
+const removeImports = require('next-remove-imports')();
+
+module.exports = {
+  ...nextConfig, // Merge 'nextConfig' object
+  ...removeImports({}), // Merge 'removeImports' object
+};

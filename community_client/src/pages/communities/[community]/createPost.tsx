@@ -1,3 +1,4 @@
+import PostEditor from '@/components/post/PostEditor';
 import { Post } from '@/types';
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
@@ -6,6 +7,7 @@ import React, { FormEvent, useState } from 'react';
 
 export default function CreatePost() {
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [body, setBody] = useState('');
 
   const router = useRouter();
@@ -23,6 +25,7 @@ export default function CreatePost() {
       const { data: post } = await axios.post<Post>('/posts', {
         title: title.trim(),
         body,
+        description,
         community: communityName,
       });
 
@@ -38,15 +41,15 @@ export default function CreatePost() {
 
   return (
     <div className="flex flex-col justify-center pt16">
-      <div className="w-10/12 mx-auto md:w-96">
+      <div className="w-10/12 mx-auto my-2 md:w-11/12 max-w-5xl">
         <div className="p-4 bgwhite rounded">
-          <h1 className="mb-3 text-lg">포스트 생성 페이지</h1>
+          <h1 className="mb-3 text-lg text-center">포스트 생성 페이지</h1>
           <form onSubmit={submitPost}>
             <div className="relative mb-2">
               <input
                 type="text"
-                className="w-full px-3 py-2 border border-gray-400 rounded focus:outline-none focus:bg-blue-300"
-                placeholder="Title"
+                className="w-full px-3 py-2 border border-gray-100 rounded focus:outline-none hover:border-violet-300 focus:border-violet-600"
+                placeholder="title"
                 maxLength={20}
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -58,13 +61,15 @@ export default function CreatePost() {
                 {title.trim().length}/20
               </div>
             </div>
-            <textarea
-              rows={4}
-              placeholder="포스트 내용"
-              className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:bg-blue-300"
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
-            ></textarea>
+            <input
+              placeholder="description"
+              className="w-full px-3 py-2 border border-gray-100 rounded focus:outline-none hover:border-violet-300 focus:border-violet-600"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <div className="my-4">
+              <PostEditor editorValue={body} setEditorValue={setBody} />
+            </div>
             <div className="flex justify-end">
               <button
                 className="px-4 py-2 text-sm font-semibold text-white bg-gray-400 border rounded"
