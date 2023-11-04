@@ -1,5 +1,4 @@
 import { Community, Post } from '@/types';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { FaRegCommentAlt } from 'react-icons/fa';
@@ -52,7 +51,7 @@ export default function PostCard({
             {post.title}
           </h1>
         </Link>
-        {post.body && <p className="my-1 text-sm">{post.body}</p>}
+        {post.description && <p className="my-1 text-sm">{post.description}</p>}
         <Link
           className="ms-2 mb-2 mt-4 w-fit flex flex-row items-center gap-1 hover:text-gray-500"
           href={post.url}
