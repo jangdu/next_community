@@ -6,15 +6,14 @@ import useSWR from 'swr';
 import dayjs from 'dayjs';
 import CommentInput from '@/components/comment/CommentInput';
 import CommentList from '@/components/comment/CommentList';
-import { useAuthState } from '@/context/auth';
 import Vote from '@/components/Vote';
 import CommunityProfile from '@/components/community/CommunityProfile';
 import { FaRegCommentAlt } from 'react-icons/fa';
+import PostContentBody from '@/components/post/PostContentBody';
 
 export default function PostPage() {
   const router = useRouter();
   const { identifier, community, slug } = router.query;
-  const { authenticated } = useAuthState();
 
   const {
     data: post,
@@ -30,34 +29,41 @@ export default function PostPage() {
 
   return (
     <div className="flex max-w-5xl px-4 py-5 mx-auto">
-      <div className="w-full md:w-9/12 mx-auto">
-        <div className="bg-white rounded-md p-3 shadow-md">
+      <div className="w-full mx-auto">
+        <div className="bg-white rounded-md p-3 shadow-md lg:px-20 lg:py-11">
           {post && (
-            <div className="flex">
+            <div className="flex w-full">
               <div className="py-2 px-2 w-full">
                 <div className="flex justify-between w-full">
-                  <div className="flex flex-col">
-                    <div className="flex flex-row items-center text-sm">
+                  <div className="flex flex-col w-full">
+                    <div className="flex w-full flex-row justify-between items-center text-sm">
                       {post.community && (
                         <CommunityProfile community={post.community} />
                       )}
-                      <p>post by</p>
-                      <Link href={`/users/${post.username}`} passHref>
-                        <button className="text-violet-400 ms-1 font-semibold hover:underline">
-                          {post.username}
-                        </button>
-                      </Link>
-                      <p className="ms-1">
-                        {dayjs(post.createdAt).format('YYYY-MM-DD HH:mm')}
-                      </p>
+                      <div className="flex">
+                        <p className=" text-gray-400">post by</p>
+                        <Link href={`/users/${post.username}`} passHref>
+                          <button className="text-violet-400 ms-1 font-semibold hover:underline">
+                            {post.username}
+                          </button>
+                        </Link>
+                        <p className="text-gray-400 ms-2">
+                          {dayjs(post.createdAt).format('YYYY-MM-DD HH:mm')}
+                        </p>
+                      </div>
                     </div>
-                    <h1 className="text-3xl mt-2">{post.title}</h1>
+                    <h1 className="text-3xl mt-2 md:mt-10">{post.title}</h1>
+                    <p className="my-3 text-base px-3 text-gray-500">
+                      {post.description}
+                    </p>
                   </div>
                   <div className="right-0 text-center text-xl">
                     <Vote post={post} mutate={postMutate} />
                   </div>
                 </div>
-                <p className="my-3 text-base border-b px-3 pb-4">{post.body}</p>
+                <div className="max-w-3xl mx-auto py-6 border-b">
+                  <PostContentBody source={post.body} />
+                </div>
                 <div className="ms-2 mb-2 mt-4 w-fit flex flex-row items-center gap-1">
                   <div className="mt-1 ms-6">
                     <FaRegCommentAlt />

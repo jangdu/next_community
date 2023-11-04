@@ -31,6 +31,7 @@ export interface Post {
   createdAt: string;
   updatedAt: string;
   community?: Community;
+  description: string;
 
   url: string;
   userVote?: number;
