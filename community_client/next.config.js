@@ -5,6 +5,7 @@ const nextConfig = {
   images: {
     domains: [
       'www.gravatar.com',
+      'res.cloudinary.com',
       'localhost',
       'ec2-52-14-81-103.us-east-2.compute.amazonaws.com',
       'community.jangdu.co.kr',

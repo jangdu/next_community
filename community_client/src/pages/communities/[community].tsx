@@ -1,19 +1,12 @@
 import LoadingUi from '@/components/LoadingUi';
 import PostCard from '@/components/PostCard';
-import SideBar from '@/components/Sidebar';
 import { useAuthState } from '@/context/auth';
 import { Post } from '@/types';
 import axios from 'axios';
 import classNames from 'classnames';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, {
-  ChangeEvent,
-  Fragment,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
 
 export default function CommunityPage() {
@@ -89,7 +82,7 @@ export default function CommunityPage() {
   return (
     <div>
       {community && (
-        <Fragment>
+        <div>
           <input
             type="file"
             hidden={true}
@@ -141,10 +134,9 @@ export default function CommunityPage() {
             <div className="flex max-w-5xl px-4 pt-5 mx-auto"></div>
           </div>
           <div className="flex max-w-5xl px-4 pt-5 mx-auto">
-            <div className="w-full md:mr-3 md:w-8/12">{renderPosts}</div>
-            <SideBar community={community} />
+            <div className="w-full">{renderPosts}</div>
           </div>
-        </Fragment>
+        </div>
       )}
     </div>
   );
