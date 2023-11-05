@@ -22,7 +22,10 @@ jobs:
             git pull origin main
             cd community_client
             npm i --force
+            pm2 delete comu-client
             npm run build:prod
+            pm2 start ecosystem.config.js
             cd /home/jangdu/next_community/community_server
             npm i --force
-            pm2 reload all
+            pm2 delete comu-server
+            pm2 start ecosystem.config.js
