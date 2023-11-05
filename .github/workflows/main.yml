@@ -19,11 +19,14 @@ jobs:
           port: ${{ secrets.REMOTE_SSH_PORT }} # 접속포트
           script: | # 실행할 스크립트
             cd /home/jangdu/next_community
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            nvm use v18.15.0
             git pull origin main
             cd community_client
             npm i --force
-            pm2 delete comu-client
             npm run build:prod
+            pm2 delete comu-client
             pm2 start ecosystem.config.js
             cd /home/jangdu/next_community/community_server
             npm i --force
