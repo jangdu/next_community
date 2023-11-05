@@ -59,9 +59,9 @@ export default function Home() {
   };
 
   return (
-    <div className="flex max-w-6xl mx-auto justify-around p-5 gap-2">
+    <div className="flex w-full mx-auto">
       {/* allPostList */}
-      <div className="w-full md:w-8/12 mx-auto">
+      <div className="w-full mx-auto">
         <h1 className="text-xl text-center p-2 my-2 font-semibold text-violet-500">
           All Posts
         </h1>
@@ -76,9 +76,6 @@ export default function Home() {
           </div>
         ))}
         {isValidating && posts.length > 0 && <LoadingUi />}
-      </div>
-      <div className="hidden w-4/12 max-w-xs shadow-md bg-white overflow-hidden h-fit ml-3 my-3 box-content rounded-lg border md:block">
-        <CommunityList />
       </div>
     </div>
   );

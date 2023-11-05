@@ -1,4 +1,5 @@
 import { NavBar } from '@/components/NavBar';
+import Sidebar from '@/components/layouts/Sidebar';
 import { AuthProvider } from '@/context/auth';
 import '@/styles/globals.css';
 import axios from 'axios';
@@ -36,9 +37,16 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <SWRConfig value={{ fetcher }}>
         <AuthProvider>
-          {!authRoute && <NavBar />}
-          <div className={authRoute ? '' : 'pt-12 bg-violet-50 min-h-screen'}>
-            <Component {...pageProps} />
+          <NavBar />
+          <div className={'pt-12 bg-gray-50 min-h-screen'}>
+            <div className="max-w-6xl flex flex-row gap-4 mx-auto p-5">
+              <div className="md:w-56 hidden md:block min-h-screen">
+                <Sidebar />
+              </div>
+              <div className="md:w-10/12 w-full mx-auto">
+                <Component {...pageProps} />
+              </div>
+            </div>
           </div>
         </AuthProvider>
       </SWRConfig>
