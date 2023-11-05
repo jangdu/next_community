@@ -27,14 +27,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        <script
-          defer
-          src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"
-          integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp"
-          crossOrigin="anonymous"
-        ></script>
-      </Head>
       <SWRConfig value={{ fetcher }}>
         <AuthProvider>
           <NavBar />

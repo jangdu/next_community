@@ -1,11 +1,8 @@
-import CommunityList from '@/components/community/CommunityList';
 import LoadingUi from '@/components/LoadingUi';
 import PostCard from '@/components/PostCard';
 import { Post } from '@/types';
 import { Inter } from 'next/font/google';
 import { useEffect, useState } from 'react';
-
-const inter = Inter({ subsets: ['latin'] });
 
 import useSWRInfinite from 'swr/infinite';
 
