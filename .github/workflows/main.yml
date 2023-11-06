@@ -8,27 +8,32 @@ jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-latest # 실행될 인스턴스 OS와 버전
+    strategy:
+      matrix:
+        node-versions: [18.x]
 
     steps:
-      - name: excuting remote ssh commands
-        uses: appleboy/ssh-action@v0.1.6 # ssh 접속하는 오픈소스
+      - name: Checkout soure code.
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: |
+          cd community_client
+          npm install -force
+          npm run build
+
+          
+      - name: Deploy to remote server
+        uses: appleboy/ssh-action@v0.1.6
         with:
-          host: ${{ secrets.REMOTE_IP }} # 인스턴스 IP
-          username: ${{ secrets.REMOTE_USER }} # 우분투 아이디
-          password: ${{ secrets.REMOTE_PASSWORD }} # ec2 instance password
-          port: ${{ secrets.REMOTE_SSH_PORT }} # 접속포트
-          script: | # 실행할 스크립트
-            cd /home/jangdu/next_community
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
-            nvm use v18.15.0
-            git pull origin main
-            cd community_client
-            npm i --force
-            npm run build:prod
-            pm2 delete comu-client
-            pm2 start ecosystem.config.js
-            cd /home/jangdu/next_community/community_server
-            npm i --force
-            pm2 delete comu-server
-            pm2 start ecosystem.config.js
+          host: ${{ secrets.REMOTE_IP }}
+          username: ${{ secrets.REMOTE_USER }}
+          password: ${{ secrets.REMOTE_PASSWORD }}
+          port: ${{ secrets.REMOTE_SSH_PORT }}
+          script: |
+            ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }} 'cd /home/jangdu/next_community && rm -rf *'
+            scp -r ./build ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }}:/home/jangdu/next_community
+            ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }} 'cd /home/jangdu/next_community/community_client && pm2 delete comu-server || : && pm2 start ecosystem.config.js'
+            ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }} 'cd /home/jangdu/next_community/community_server && npm install -force'
+            ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }} 'cd /home/jangdu/next_community/community_server && pm2 delete comu-server || : && pm2 start ecosystem.config.js'
+            
