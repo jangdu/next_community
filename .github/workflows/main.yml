@@ -27,7 +27,7 @@ jobs:
           mkdir -p /home/runner/.ssh && touch /home/runner/.ssh/known_hosts
           ssh-keyscan -H ${{ secrets.REMOTE_IP }} >> ~/.ssh/known_hosts
           sshpass -p ${{ secrets.REMOTE_PASSWORD }} ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }} 'cd /home/jangdu/next_community/community_client && rm -rf ./build'
-          sshpass -p ${{ secrets.REMOTE_PASSWORD }} scp -r ./community_client/build ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }}:/home/jangdu/next_community/community_client
+          sshpass -p ${{ secrets.REMOTE_PASSWORD }} scp -r ./community_client/.next ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }}:/home/jangdu/next_community/community_client
 
       - name: Deploy to remote server
         uses: appleboy/ssh-action@v0.1.6
@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.REMOTE_PASSWORD }}
           port: ${{ secrets.REMOTE_SSH_PORT }}
           script: |
-            cd /home/jangdu/next_community/community_client && pm2 delete comu-server || : && pm2 start ecosystem.config.js
+            cd /home/jangdu/next_community/community_client && pm2 delete comu-client || : && pm2 start ecosystem.config.js
             cd /home/jangdu/next_community && git pull origin main
             cd /home/jangdu/next_community/community_server && npm install --force
             cd /home/jangdu/next_community/community_server && pm2 delete comu-server || : && pm2 start ecosystem.config.js
