@@ -21,7 +21,7 @@ export const NavBar: React.FC = () => {
   };
 
   return (
-    <div className="flex py-3 inset-x-0 items-center justify-between px-8 bg-gray-100 border-b border-gray-300 shadow-b-lg h-20">
+    <div className="flex inset-x-0 items-center justify-between px-8 bg-gray-100 border-b border-gray-300 shadow-b-lg h-20">
       <span className="text-2xl font-bold text-black">
         <Link href="/">jangduBlog</Link>
       </span>

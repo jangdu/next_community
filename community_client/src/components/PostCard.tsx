@@ -21,11 +21,11 @@ export default function PostCard({
 }: PostCardProps) {
   return (
     <div
-      className="flex mb-4 bg-white rounded-lg shadow-md overflow-hidden"
+      className="flex mb-4 bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 border hover:border-black hover:shadow-xl"
       id={post.identifier}
     >
       {/* 투표 기능 */}
-      <div className="flex bg-violet-200">
+      <div className="flex bg-gray-300">
         <Vote post={post} mutate={mutate} />
       </div>
       {/* { 포스트 } */}
@@ -37,10 +37,11 @@ export default function PostCard({
           <div className="flex flex-row items-center text-sm text-gray-500">
             <p>post by</p>
             <Link href={`users/${post.username}`} passHref>
-              <button className="text-violet-400 mx-1 hover:underline">
+              <button className="text-blue-400 mx-1 hover:underline">
                 {post.username}
               </button>
             </Link>
+
             <p className="ms-1">
               {dayjs(post.createdAt).format('YYYY-MM-DD HH:mm')}
             </p>

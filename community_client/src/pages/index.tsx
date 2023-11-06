@@ -59,7 +59,7 @@ export default function Home() {
     <div className="flex w-full mx-auto">
       {/* allPostList */}
       <div className="w-full mx-auto">
-        <h1 className="text-xl text-center p-2 my-2 font-semibold text-violet-500">
+        <h1 className="text-xl text-center p-2 my-2 font-semibold text-black">
           All Posts
         </h1>
         {isInitialLoading && <LoadingUi />}

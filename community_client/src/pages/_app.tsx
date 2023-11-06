@@ -29,10 +29,10 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <SWRConfig value={{ fetcher }}>
         <AuthProvider>
-          <NavBar />
-          <div className={'bg-gray-100 min-h-screen pt-5'}>
+          <div className={'bg-gray-100 min-h-screen'}>
+            <NavBar />
             <div className="max-w-6xl flex flex-row gap-4 mx-auto px-4">
-              <div className="md:w-56 hidden md:block min-h-screen">
+              <div className="md:w-56 hidden md:block">
                 <Sidebar />
               </div>
               <div className="md:w-10/12 w-full mx-auto">
