@@ -21,13 +21,13 @@ export const NavBar: React.FC = () => {
   };
 
   return (
-    <div className="fixed py-3 inset-x-0 top-0 z-10 flex items-center s: justify-between px-5 bg-white border-b-[1px] border-b-violet-300 h-13">
-      <span className="text-2xl font-bold text-violet-500">
-        <Link href="/">JangduLog</Link>
+    <div className="flex py-3 inset-x-0 items-center justify-between px-8 bg-gray-100 border-b border-gray-300 shadow-b-lg h-20">
+      <span className="text-2xl font-bold text-black">
+        <Link href="/">jangduBlog</Link>
       </span>
 
       <div className="flex items-center gap-3">
-        <div className="relative flex items-center bg-gray-100 border rounded hover:border-violet-700 hover:bg-white">
+        <div className="relative flex items-center bg-white border rounded-md hover:border-gray-400 focus:border-gray-700">
           <FaSearch className="ml-2 text-white-400" />
           <input
             type="text"
@@ -38,7 +38,7 @@ export const NavBar: React.FC = () => {
         {!loading &&
           (authenticated ? (
             <button
-              className="w-20 px-2 mr-2 text-sm text-center text-white bg-violet-400 rounded h-7 transition hover:bg-violet-600"
+              className="w-20 px-2 mr-2 text-sm text-center text-white bg-gray-400 rounded h-7 transition hover:bg-gray-600"
               onClick={handleLogout}
             >
               로그아웃
@@ -46,12 +46,12 @@ export const NavBar: React.FC = () => {
           ) : (
             <>
               <Link href="/signin">
-                <button className="w-20 px-2 text-sm text-center text-white bg-violet-400 rounded h-7 transition hover:bg-violet-600">
+                <button className="w-20 px-2 text-sm text-center text-white bg-gray-400 rounded h-7 transition hover:bg-gray-600">
                   로그인
                 </button>
               </Link>
               <Link href="/signup">
-                <button className="w-20 px-2 text-sm text-center text-white bg-violet-400 rounded h-7 transition hover:bg-violet-600">
+                <button className="w-20 px-2 text-sm text-center text-white bg-gray-400 rounded h-7 transition hover:bg-gray-600">
                   회원가입
                 </button>
               </Link>
