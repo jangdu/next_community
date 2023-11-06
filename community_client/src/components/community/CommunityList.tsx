@@ -16,27 +16,30 @@ export default function CommunityList() {
   const { data: communityRanking } = useSWR<Community[]>(address, fetcher);
 
   return (
-    <div className="flex flex-col text-gray-500">
-      <p className="mb-1">Category</p>
+    <div className="flex flex-col">
+      <p className="my-1">Category</p>
       <div className="w-fit text-sm flex ms-2 mt-1">
-        <Link className="hover:underline hover:text-black" href={`/`}>
-          <p>@All</p>
+        <Link
+          className="flex flex-row hover:underline text-gray-500 hover:text-black"
+          href={`/`}
+        >
+          <p>ㄴ AllPost</p>
         </Link>
       </div>
       {communityRanking?.map((community) => {
         return (
           <div key={community.name} className="w-fit text-sm flex ms-2 mt-1">
             <Link
-              className="hover:underline hover:text-black"
+              className="hover:underline text-gray-500 hover:text-black flex items-center"
               href={`/communities/${community.name}`}
             >
-              <p>@{community.name}</p>
+              <p>ㄴ {community.name}</p>
             </Link>
           </div>
         );
       })}
 
-      {authenticated && user && user.username === 'jangd' ? (
+      {authenticated && user && user.username === 'jangdu' ? (
         <div className="w-full py-6 text-center">
           <Link href={'/communities/create'}>
             <button className="transition px-2 py-1 text-center w-fit text-white bg-violet-400 rounded hover:bg-violet-500">

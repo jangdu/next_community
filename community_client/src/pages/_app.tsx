@@ -1,4 +1,4 @@
-import { NavBar } from '@/components/NavBar';
+import { NavBar } from '@/components/layouts/NavBar';
 import Sidebar from '@/components/layouts/Sidebar';
 import { AuthProvider } from '@/context/auth';
 import '@/styles/globals.css';
@@ -30,8 +30,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <SWRConfig value={{ fetcher }}>
         <AuthProvider>
           <NavBar />
-          <div className={'pt-12 bg-gray-50 min-h-screen'}>
-            <div className="max-w-6xl flex flex-row gap-4 mx-auto p-5">
+          <div className={'bg-gray-100 min-h-screen pt-5'}>
+            <div className="max-w-6xl flex flex-row gap-4 mx-auto px-4">
               <div className="md:w-56 hidden md:block min-h-screen">
                 <Sidebar />
               </div>

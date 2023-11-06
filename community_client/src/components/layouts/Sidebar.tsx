@@ -8,7 +8,7 @@ import Link from 'next/link';
 export default function Sidebar() {
   return (
     <div className={`sticky top-28`}>
-      <div className="flex flex-col pt-6 px-4 my-4 border rounded-md shadow transition-all duration-500 hover:bg-white hover:scale-[103%] hover:border-black">
+      <div className="flex flex-col pt-6 px-4 my-4 border text-gray-400 rounded-md shadow transition-all bg-white duration-500 hover:text-gray-600 hover:border-black hover:shadow-xl">
         <div className="flex flex-row items-center gap-4">
           <Image
             src={
@@ -17,14 +17,14 @@ export default function Sidebar() {
             alt="profile"
             width={80}
             height={30}
-            className="rounded-full shadow-md"
+            className="rounded-full shadow-md p-1 border bg-white border-gray-300"
           />
           <div className="flex flex-col">
-            <h2 className="font-semibold text-md text-gray-500">장두혁</h2>
-            <p className="font-medium text-sm text-gray-500">1999.03</p>
+            <h2 className="font-semibold text-md">장두혁</h2>
+            <p className="font-medium text-sm">1999.03</p>
           </div>
         </div>
-        <div className="text-gray-500 text-xl my-4 flex flex-col gap-2">
+        <div className="text-xl my-4 flex flex-col gap-2">
           <p className="text-sm">javascript Developer</p>
           <p className="text-sm mb-1">@jangdu</p>
           <div className="flex flex-row gap-1 items-center">
@@ -47,7 +47,7 @@ export default function Sidebar() {
           </Link>
         </div>
       </div>
-      <div className="flex flex-col py-2 px-4 my-4 border rounded-md shadow transition-all duration-500 hover:bg-white hover:scale-105 hover:border-black">
+      <div className="flex flex-col bg-white py-2 px-4 my-4 border rounded-md shadow transition-all duration-500 text-gray-500 hover:text-black hover:bg-white hover:border-black">
         <CommunityList />
       </div>
     </div>
