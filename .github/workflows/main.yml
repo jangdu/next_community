@@ -24,8 +24,6 @@ jobs:
 
       - name: Copy files to remote server
         run: |
-          sudo apt-get install -y sshpass
-          sshpass -p ${{ secrets.REMOTE_PASSWORD }} scp -r /local/path user@remote_host:/remote/path
           mkdir -p /home/runner/.ssh && touch /home/runner/.ssh/known_hosts
           ssh-keyscan -H ${{ secrets.REMOTE_IP }} >> ~/.ssh/known_hosts
           sshpass -p ${{ secrets.REMOTE_PASSWORD }} scp -r build ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }}:/home/jangdu/next_community
