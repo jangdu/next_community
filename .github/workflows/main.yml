@@ -20,7 +20,7 @@ jobs:
         run: |
           cd community_client
           npm install -force
-          npm run build
+          npm run build:prod
 
           
       - name: Deploy to remote server
