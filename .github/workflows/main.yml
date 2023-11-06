@@ -37,6 +37,9 @@ jobs:
           password: ${{ secrets.REMOTE_PASSWORD }}
           port: ${{ secrets.REMOTE_SSH_PORT }}
           script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            nvm use v18.15.0
             cd /home/jangdu/next_community/community_client && pm2 delete comu-client || : && pm2 start ecosystem.config.js
             cd /home/jangdu/next_community && git pull origin main
             cd /home/jangdu/next_community/community_server && npm install --force
