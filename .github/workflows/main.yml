@@ -26,8 +26,8 @@ jobs:
         run: |
           mkdir -p /home/runner/.ssh && touch /home/runner/.ssh/known_hosts
           ssh-keyscan -H ${{ secrets.REMOTE_IP }} >> ~/.ssh/known_hosts
-          ls
-          sshpass -p ${{ secrets.REMOTE_PASSWORD }} scp -r build ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }}:/home/jangdu/next_community
+          sshpass -p ${{ secrets.REMOTE_PASSWORD }} ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }} 'cd /home/jangdu/next_community && rm -rf *
+          sshpass -p ${{ secrets.REMOTE_PASSWORD }} scp -r ./*** ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }}:/home/jangdu/next_community
 
       - name: Deploy to remote server
         uses: appleboy/ssh-action@v0.1.6
