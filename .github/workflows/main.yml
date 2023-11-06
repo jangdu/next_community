@@ -24,6 +24,7 @@ jobs:
 
       - name: Copy files to remote server
         run: |
+          ssh-keyscan -H ${{ secrets.REMOTE_IP }} >> ~/.ssh/known_hosts
           scp -r build ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }}:/home/jangdu/next_community
 
       - name: Deploy to remote server
