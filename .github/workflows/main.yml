@@ -21,6 +21,8 @@ jobs:
           cd community_client
           npm install --force
           npm run build:prod
+          ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }} 'cd /home/jangdu/next_community && rm -rf *
+          scp -r . ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }}:/home/jangdu/next_community
           
       - name: Deploy to remote server
         uses: appleboy/ssh-action@v0.1.6
@@ -31,9 +33,7 @@ jobs:
           password: ${{ secrets.REMOTE_PASSWORD }}
           port: ${{ secrets.REMOTE_SSH_PORT }}
           script: |
-            ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }} 'cd /home/jangdu/next_community && rm -rf *'
-            scp -r . ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }}:/home/jangdu/next_community
-            ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }} 'cd /home/jangdu/next_community/community_client && pm2 delete comu-server || : && pm2 start ecosystem.config.js'
-            ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }} 'cd /home/jangdu/next_community/community_server && npm install -force'
-            ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }} 'cd /home/jangdu/next_community/community_server && pm2 delete comu-server || : && pm2 start ecosystem.config.js'
+            cd /home/jangdu/next_community/community_client && pm2 delete comu-server || : && pm2 start ecosystem.config.js
+            cd /home/jangdu/next_community/community_server && npm install -force
+            cd /home/jangdu/next_community/community_server && pm2 delete comu-server || : && pm2 start ecosystem.config.js
             
