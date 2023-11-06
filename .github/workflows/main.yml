@@ -13,17 +13,19 @@ jobs:
         node-versions: [18.x]
 
     steps:
-      - name: Checkout soure code.
+      - name: Checkout source code.
         uses: actions/checkout@v2
 
-      - name: Install Dependencies
+      - name: Install Dependencies and Build
         run: |
           cd community_client
           npm install --force
           npm run build:prod
-          ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }} 'cd /home/jangdu/next_community && rm -rf *
-          scp -r . ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }}:/home/jangdu/next_community
-          
+
+      - name: Copy files to remote server
+        run: |
+          scp -r build ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_IP }}:/home/jangdu/next_community
+
       - name: Deploy to remote server
         uses: appleboy/ssh-action@v0.1.6
         with:
@@ -34,6 +36,5 @@ jobs:
           port: ${{ secrets.REMOTE_SSH_PORT }}
           script: |
             cd /home/jangdu/next_community/community_client && pm2 delete comu-server || : && pm2 start ecosystem.config.js
-            cd /home/jangdu/next_community/community_server && npm install -force
+            cd /home/jangdu/next_community/community_server && npm install --force
             cd /home/jangdu/next_community/community_server && pm2 delete comu-server || : && pm2 start ecosystem.config.js
-            
