@@ -31,11 +31,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <AuthProvider>
           <div className={'bg-gray-100 min-h-screen'}>
             <NavBar />
-            <div className="max-w-6xl flex flex-row gap-4 mx-auto px-4">
-              <div className="md:w-56 hidden md:block">
+            <div className="max-w-5xl flex flex-row gap-2 mx-auto px-4">
+              <div className="w-3/12 hidden md:block">
                 <Sidebar />
               </div>
-              <div className="md:w-10/12 w-full mx-auto">
+              <div className="w-full md:w-9/12 mx-auto">
                 <Component {...pageProps} />
               </div>
             </div>
