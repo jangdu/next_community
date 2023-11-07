@@ -18,7 +18,7 @@ const EditerMarkdown = dynamic(
 export default function PostContentBody({ source }: PostContentBodyProp) {
   return (
     <div data-color-mode="light">
-      <EditerMarkdown source={source} style={{ whiteSpace: 'pre-wrap' }} />
+      <EditerMarkdown source={source} />
     </div>
   );
 }

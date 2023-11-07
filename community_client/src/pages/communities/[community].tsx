@@ -5,6 +5,7 @@ import { Post } from '@/types';
 import axios from 'axios';
 import classNames from 'classnames';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
@@ -129,6 +130,17 @@ export default function CommunityPage() {
                   <h1 className="my-1 text-3xl font-bold">{community.name}</h1>
                 </div>
                 <p>{community.title}</p>
+                {authenticated && user && user.username === 'jangdu' ? (
+                  <div className="w-full text-center my-2 flex">
+                    <Link href={`/communities/${community.name}/createPost`}>
+                      <button className="transition px-2 py-1 text-center w-fit text-white bg-violet-400 rounded hover:bg-violet-500">
+                        글쓰기
+                      </button>
+                    </Link>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
               </div>
             </div>
             <div className="flex max-w-5xl px-4 pt-5 mx-auto"></div>
