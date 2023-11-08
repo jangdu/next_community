@@ -1,5 +1,6 @@
 import LoadingUi from '@/components/LoadingUi';
 import PostCard from '@/components/PostCard';
+import SkeletonUi from '@/components/ui/SkeletonUi';
 import { Post } from '@/types';
 import { Inter } from 'next/font/google';
 import { useEffect, useState } from 'react';
@@ -20,6 +21,7 @@ export default function Home() {
     size: page,
     setSize: setPage,
     isValidating,
+    isLoading,
     mutate: allPostsMutate,
   } = useSWRInfinite<Post[]>(getKey);
 
@@ -60,7 +62,7 @@ export default function Home() {
       {/* allPostList */}
       <div className="w-full mx-auto">
         <h1 className="text-xl p-2 my-2 font-semibold text-black">All Posts</h1>
-        {isInitialLoading && <LoadingUi />}
+        {(isInitialLoading || isLoading) && <SkeletonUi />}
         {posts?.map((post) => (
           <div key={post.identifier} id={post.identifier}>
             <PostCard
@@ -70,7 +72,7 @@ export default function Home() {
             />
           </div>
         ))}
-        {isValidating && posts.length > 0 && <LoadingUi />}
+        {isValidating && posts.length > 0 && <SkeletonUi />}
       </div>
     </div>
   );

@@ -32,7 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <AuthProvider>
           <div className={'bg-white min-h-screen'}>
             <NavBar />
-            <div className="max-w-5xl md:flex md:flex-row gap-2 mx-auto px-4">
+            <div className="max-w-5xl flex md:flex-row min-h-[80vh] gap-2 mx-auto px-4">
               <div className="md:w-3/12 hidden md:block">
                 <Sidebar />
               </div>

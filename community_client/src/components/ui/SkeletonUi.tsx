@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LoadingUi() {
+export default function SkeletonUi() {
   return (
     <div className="rounded-md p-4 w-full my-3 mx-auto">
       <div className="animate-pulse flex gap-2">
