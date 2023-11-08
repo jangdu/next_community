@@ -1,3 +1,4 @@
+import Footer from '@/components/layouts/Footer';
 import { NavBar } from '@/components/layouts/NavBar';
 import Sidebar from '@/components/layouts/Sidebar';
 import { AuthProvider } from '@/context/auth';
@@ -39,6 +40,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 <Component {...pageProps} />
               </div>
             </div>
+            <Footer />
           </div>
         </AuthProvider>
       </SWRConfig>
