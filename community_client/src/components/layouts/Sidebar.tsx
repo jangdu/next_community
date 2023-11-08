@@ -7,8 +7,10 @@ import Link from 'next/link';
 
 export default function Sidebar() {
   return (
-    <div className={`sticky top-28`}>
-      <div className="flex flex-col pt-6 px-4 my-4 border text-gray-400 rounded-md shadow transition-all bg-white duration-500 hover:text-gray-600 hover:border-black hover:shadow-xl">
+    <div
+      className={`sticky top-28 rounded-md border border-white text-gray-400 transition-all bg-white duration-500 hover:text-gray-600 hover:border-black hover:shadow-xl `}
+    >
+      <div className="flex flex-col pt-6 px-4 my-4 ">
         <div className="flex flex-row items-center gap-4">
           <Image
             src={
@@ -47,7 +49,7 @@ export default function Sidebar() {
           </Link>
         </div>
       </div>
-      <div className="flex flex-col bg-white py-2 px-4 my-4 border rounded-md shadow transition-all duration-500 text-gray-500 hover:text-black hover:bg-white hover:border-black">
+      <div className="flex flex-col py-2 px-4 my-4">
         <CommunityList />
       </div>
     </div>
