@@ -13,7 +13,8 @@ import DefaultEntity from './Entity';
 import User from './User';
 import Vote from './Vote';
 import Comment from './Comment';
-import { makeId, slugify } from '../utils/helpers';
+import { makeId } from '../utils/helpers';
+import { slugify } from 'transliteration';
 
 @Entity('posts')
 export default class Post extends DefaultEntity {

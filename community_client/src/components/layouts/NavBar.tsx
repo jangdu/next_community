@@ -27,7 +27,7 @@ export const NavBar: React.FC = () => {
       </span>
 
       <div className="flex items-center gap-3">
-        <div className="relative flex items-center bg-white border rounded-md hover:border-gray-400 focus:border-gray-700">
+        <div className="relative hidden md:flex  items-center bg-white border rounded-md hover:border-gray-400 focus:border-gray-700">
           <FaSearch className="ml-2 text-white-400" />
           <input
             type="text"

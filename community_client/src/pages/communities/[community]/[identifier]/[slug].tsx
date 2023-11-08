@@ -28,9 +28,9 @@ export default function PostPage() {
   );
 
   return (
-    <div className="flex max-w-5xl px-4 py-5 mx-auto">
+    <div className="flex max-w-5xl py-5 mx-auto">
       <div className="w-full mx-auto">
-        <div className="bg-white rounded-md p-3 shadow-md lg:px-8 lg:py-8">
+        <div className="rounded-md md:p-3 lg:py-8">
           {post && (
             <div className="flex w-full">
               <div className="py-2 px-2 w-full">
