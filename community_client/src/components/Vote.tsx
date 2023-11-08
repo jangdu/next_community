@@ -2,7 +2,7 @@ import { useAuthState } from '@/context/auth';
 import { Comment, Post } from '@/types';
 import axios from 'axios';
 import React from 'react';
-import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
+import { BsHandThumbsUp, BsHandThumbsDown } from 'react-icons/bs';
 
 interface VoteProps {
   post: Post;
@@ -39,33 +39,37 @@ export default function Vote({ post, comment, mutate }: VoteProps) {
   };
 
   return (
-    <div className="flex-shrink-0 w-10 mx-2 my-auto text-center rounded-l">
+    <div className="flex flex-row w-20 mx-2 my-1 items-center text-center rounded-l">
       <div
-        className="flex justify-center w-6 mx-auto py-1 text-gray-500 rounded cursor-pointer transition hover:bg-violet-300"
+        className="flex justify-center w-6 mx-auto py-1 font-bold rounded cursor-pointer transition hover:scale-125 hover:bg-gray-200"
         onClick={() => onClickVoteBtn(1, comment)}
       >
         {!comment && (
-          <FaArrowUp className={post.userVote === 1 ? 'text-red-600' : ''} />
+          <BsHandThumbsUp
+            className={post.userVote === 1 ? 'text-red-600' : ''}
+          />
         )}
         {comment && (
-          <FaArrowUp className={comment.userVote === 1 ? 'text-red-600' : ''} />
+          <BsHandThumbsUp
+            className={comment.userVote === 1 ? 'text-red-600' : ''}
+          />
         )}
       </div>
       <p className="text-xs font-bold my-2">
         {comment ? comment.voteScore : post.voteScore}
       </p>
       <div
-        className="flex justify-center w-6 py-1 mx-auto text-gray-500 rounded cursor-pointer transition hover:bg-violet-300"
+        className="flex justify-center w-6 py-1 mx-auto font-bold rounded cursor-pointer transition hover:scale-125 hover:bg-gray-200"
         onClick={() => onClickVoteBtn(-1, comment)}
       >
         {!comment && (
-          <FaArrowDown
+          <BsHandThumbsDown
             className={post.userVote === -1 ? 'text-blue-600' : ''}
           />
         )}
         {comment && (
-          <FaArrowDown
-            className={comment.userVote === -1 ? 'text-blue-600' : ''}
+          <BsHandThumbsDown
+            className={comment.userVote === -1 ? 'text-blue-500' : ''}
           />
         )}
       </div>

@@ -20,16 +20,9 @@ export default function PostCard({
   community,
 }: PostCardProps) {
   return (
-    <div
-      className="flex mb-4 bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 border hover:border-black hover:shadow-xl"
-      id={post.identifier}
-    >
-      {/* 투표 기능 */}
-      <div className="flex bg-gray-300">
-        <Vote post={post} mutate={mutate} />
-      </div>
+    <div className="flex flex-col mb-2" id={post.identifier}>
       {/* { 포스트 } */}
-      <div className="w-full p-3 flex flex-col">
+      <div className="w-full p-3 flex flex-col rounded-lg overflow-hidden ">
         <div className="flex flex-row justify-between items-center">
           {!isInCommunityPage && post.community && (
             <CommunityProfile community={post.community} />
@@ -53,16 +46,20 @@ export default function PostCard({
           </h1>
         </Link>
         {post.description && <p className="my-1 text-sm">{post.description}</p>}
-        <Link
-          className="ms-2 mb-2 mt-4 w-fit flex flex-row items-center gap-1 hover:text-gray-500"
-          href={post.url}
-        >
-          <div className="mt-[3.2px] mr-1">
-            <FaRegCommentAlt />
-          </div>
-          <span>댓글 {post.commentCount || 0}</span>
-        </Link>
+        <div className="flex flex-row items-center">
+          <Link
+            className="ms-2 w-fit flex flex-row items-center gap-1 transition rounded px-2 py-1 hover:bg-gray-200"
+            href={post.url}
+          >
+            <div className="mt-[3.2px] mr-1">
+              <FaRegCommentAlt />
+            </div>
+            <span>댓글 {post.commentCount || 0}</span>
+          </Link>
+          <Vote post={post} mutate={mutate} />
+        </div>
       </div>
+      <div className="border border-gray-300 w-full mt-2"></div>
     </div>
   );
 }
