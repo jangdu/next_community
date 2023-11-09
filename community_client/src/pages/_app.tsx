@@ -5,7 +5,6 @@ import { AuthProvider } from '@/context/auth';
 import '@/styles/globals.css';
 import axios from 'axios';
 import type { AppProps } from 'next/app';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { SWRConfig } from 'swr';
 
