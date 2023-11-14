@@ -18,7 +18,7 @@ export default function Sidebar() {
             }
             alt="profile"
             width={80}
-            height={30}
+            height={80}
             className="rounded-full shadow-md p-1 border bg-white border-gray-300"
           />
           <div className="flex flex-col">
