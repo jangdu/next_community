@@ -36,10 +36,10 @@ export default function SignUp() {
   };
 
   return (
-    <div className="bg-white">
-      <div className="flex flex-col items-center justify-center h-screen p-6">
+    <div className="bg-white flex justify-center h-full">
+      <div className="flex flex-col items-center my-auto h-fit justify-center p-6">
         <div className="w-10/12 flex flex-col mx-auto md:w-96">
-          <h1 className="mb-2 text-lg font-medium">회원가입</h1>
+          <h1 className="mb-2 text-lg font-medium text-center">회원가입</h1>
           <form onSubmit={handleSubmit} className=" flex flex-col gap-2">
             <InputGroup
               placeholder="Email"
@@ -64,7 +64,7 @@ export default function SignUp() {
               회원 가입
             </button>
           </form>
-          <small className="flex justify-end">
+          <small className="flex justify-end mt-2">
             <span>이미 가입하셨나요?</span>
             <Link href="/signin">
               <button className="ml-1 text-blue-500 uppercase">로그인</button>
