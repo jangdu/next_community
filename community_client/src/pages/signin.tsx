@@ -46,10 +46,10 @@ export default function SignIn() {
   };
 
   return (
-    <div className="bg-white">
-      <div className="flex flex-col items-center justify-center h-screen p-6">
+    <div className="flex bg-white h-full">
+      <div className="flex flex-col my-auto mx-auto h-fit items-center justify-center">
         <div className="w-10/12 mx-auto md:w-96">
-          <h1 className="mb-2 text-lg font-medium">로그인</h1>
+          <h1 className="mb-4 text-lg font-medium text-center">로그인</h1>
           <form onSubmit={handleSubmit}>
             <InputGroup
               placeholder="Username"
@@ -70,7 +70,7 @@ export default function SignIn() {
               로그인
             </button>
           </form>
-          <small>
+          <small className="flex justify-end mt-2 ">
             아직 아이디가 없으신가요?
             <Link href={'/signup'}>
               <button className="ml-1 text-blue-500 uppercase">회원가입</button>
